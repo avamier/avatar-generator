@@ -205,7 +205,7 @@ function createPreview() {
   console.log(`✅ HTML style guide generated! Open ${HTML_OUTPUT_FILE} in your browser.`);
 
   // --- Assemble and Write Markdown File ---
-  const markdownContent = `## 🖼️ Available Styles & Palettes\n\nThis table shows a preview for each style combined with each palette in both light and dark variants.\n\n${markdownTable}`;
+  const markdownContent = `### Style & Palette Combinations\n\nThe following table shows a preview for each style combined with each available color palette in both its \`light\` and \`dark\` variants.\n\n${markdownTable}`;
   const mdOutputPath = path.join(process.cwd(), MD_OUTPUT_FILE);
   fs.writeFileSync(mdOutputPath, markdownContent);
   console.log(`✅ Markdown preview generated! See ${MD_OUTPUT_FILE}.`);
