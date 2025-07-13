@@ -1,3 +1,6 @@
+/**
+ * @file Defines the 'dark' color palette.
+ */
 import { ColorPalette } from '../types.js';
 
 export const darkPalette: ColorPalette = {

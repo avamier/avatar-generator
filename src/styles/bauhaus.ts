@@ -1,3 +1,7 @@
+/**
+ * @file Defines the 'bauhaus' avatar style.
+ * @description This style generates an abstract, geometric composition inspired by the Bauhaus art movement.
+ */
 import { AvatarStyle, AvatarOptions } from '../types.js';
 
 const generateBauhaus = (hash: number, palette: string[], options: AvatarOptions): string => {

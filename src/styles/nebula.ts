@@ -1,3 +1,7 @@
+/**
+ * @file Defines the 'nebula' avatar style.
+ * @description This style generates a cosmic scene with a nebula and stars.
+ */
 import { AvatarStyle, AvatarOptions } from '../types.js';
 
 const createRandomGenerator = (seed: number) => {

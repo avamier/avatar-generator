@@ -1,3 +1,6 @@
+/**
+ * @file Defines the 'muted' color palette.
+ */
 import { ColorPalette } from '../types.js';
 
 export const mutedPalette: ColorPalette = {

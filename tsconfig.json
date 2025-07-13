@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     /* Build Options */
-    "target": "ES2020",
-    "module": "NodeNext",
+    "target": "ES2020", // Specifies the ECMAScript target version
+    "module": "NodeNext", // Specifies the module code generation
     "moduleResolution": "NodeNext",
     "outDir": "./dist",
     "declaration": true,

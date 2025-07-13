@@ -1,0 +1,18 @@
+# Source files
+src/
+
+# Test files
+*.test.ts
+
+# Configuration files
+jest.config.js
+tsconfig.json
+
+# Scripts
+scripts/
+
+# Preview files
+preview/
+
+# Git files
+.gitignore

@@ -1,3 +1,7 @@
+/**
+ * @file Defines the 'polygon' avatar style.
+ * @description This style generates a regular polygon with a gradient fill.
+ */
 import { AvatarStyle, AvatarOptions } from '../types.js';
 
 const generate = (hash: number, palette: string[], options: AvatarOptions): string => {

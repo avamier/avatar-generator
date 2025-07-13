@@ -1,3 +1,6 @@
+/**
+ * @file Defines the 'monokai' color palette.
+ */
 import { ColorPalette } from '../types.js';
 
 export const monokaiPalette: ColorPalette = {

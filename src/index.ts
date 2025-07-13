@@ -46,9 +46,9 @@ const simpleHash = (str: string): number => {
   for (let i = 0; i < str.length; i++) {
     const char = str.charCodeAt(i);
     hash = (hash << 5) - hash + char;
-    hash |= 0; // Convert to 32bit integer
+    hash |= 0; // Ensure the hash is a 32-bit integer
   }
-  return Math.abs(hash);
+  return Math.abs(hash); // Return a non-negative hash value
 };
 
 

@@ -1,3 +1,6 @@
+/**
+ * @file Defines the 'grayscale' color palette.
+ */
 import { ColorPalette } from '../types.js';
 
 export const grayscalePalette: ColorPalette = {

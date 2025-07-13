@@ -1,3 +1,7 @@
+/**
+ * @file Defines the 'pixel' avatar style.
+ * @description This style generates a symmetrical, pixel-art pattern.
+ */
 import { AvatarStyle, AvatarOptions } from '../types.js';
 
 const generatePixel = (hash: number, palette: string[], options: AvatarOptions): string => {

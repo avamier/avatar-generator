@@ -1,3 +1,7 @@
+/**
+ * @file Defines the 'rings' avatar style.
+ * @description This style generates a set of concentric rings with varying stroke widths.
+ */
 import { AvatarStyle, AvatarOptions } from '../types.js';
 
 const generateRings = (hash: number, palette: string[], options: AvatarOptions): string => {

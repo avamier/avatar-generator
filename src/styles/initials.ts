@@ -1,3 +1,7 @@
+/**
+ * @file Defines the 'initials' avatar style.
+ * @description This style generates an avatar with the initials of a display name.
+ */
 import { AvatarStyle, AvatarOptions } from '../types.js';
 
 const generateInitials = (hash: number, palette: string[], options: AvatarOptions): string => {

@@ -1,3 +1,7 @@
+/**
+ * @file Defines the 'gradient' avatar style.
+ * @description This style generates a simple, three-color linear gradient.
+ */
 import { AvatarStyle, AvatarOptions } from '../types.js';
 
 const generateGradient = (hash: number, palette: string[], options: AvatarOptions): string => {

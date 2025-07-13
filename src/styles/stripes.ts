@@ -1,8 +1,10 @@
+/**
+ * @file Defines the 'stripes' avatar style.
+ * @description This style generates a diagonal stripe pattern with varied widths and angles.
+ * 
+*/
 import { AvatarStyle, AvatarOptions } from '../types.js';
 
-/**
- * Generates the SVG content for a diagonal stripe pattern with varied widths.
- */
 const generate = (hash: number, palette: string[], options: AvatarOptions): string => {
     const { size = 100 } = options; // Correctly destructure size from the options object
     const [color1, color2, color3] = palette;

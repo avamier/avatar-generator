@@ -1,3 +1,6 @@
+/**
+ * @file Defines the 'light' color palette.
+ */
 import { ColorPalette } from '../types.js';
 
 export const lightPalette: ColorPalette = {

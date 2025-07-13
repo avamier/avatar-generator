@@ -1,3 +1,7 @@
+/**
+ * @file Defines the 'bauhaus' avatar style.
+ * @description This style generates an abstract, geometric composition inspired by the Bauhaus art movement.
+ */
 import { ColorPalette } from '../types.js';
 
 export const pridePalette: ColorPalette = {
