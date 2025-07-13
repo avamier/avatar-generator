@@ -14,8 +14,8 @@ import * as path from 'path';
 const PREVIEW_SEED = process.argv[2] || 'live-preview-seed-string';
 const HTML_PREVIEW_SIZE = 150; // Size for the interactive HTML preview
 const MARKDOWN_IMAGE_SIZE = 100; // A smaller, more compact size for the README
-const HTML_OUTPUT_FILE = 'preview.html';
-const MD_OUTPUT_FILE = 'PREVIEW.md';
+const HTML_OUTPUT_FILE = 'styles.html';
+const MD_OUTPUT_FILE = 'STYLES.md';
 const ASSETS_DIR = 'preview_assets';
 
 
@@ -69,17 +69,17 @@ function createPreview() {
     // Loop through each palette to generate avatars and build the row/section content
     allPalettes.forEach(palette => {
       // --- Generate Avatars ---
-      const highContrastAvatar = generateAvatar(PREVIEW_SEED, {
+      const lightVariantAvatar = generateAvatar(PREVIEW_SEED, {
         type: style.name,
         palette: palette.name,
-        contrast: 'high',
+        variant: 'light',
         size: HTML_PREVIEW_SIZE,
         displayName: 'Ava Mier',
       });
-      const lowContrastAvatar = generateAvatar(PREVIEW_SEED, {
+      const darkVariantAvatar = generateAvatar(PREVIEW_SEED, {
         type: style.name,
         palette: palette.name,
-        contrast: 'low',
+        variant: 'dark',
         size: HTML_PREVIEW_SIZE,
         displayName: 'Ava Mier',
       });
@@ -90,27 +90,27 @@ function createPreview() {
           <h3 class="palette-name">${palette.name}</h3>
           <div class="avatar-pair">
             <div class="avatar-container">
-              <img src="${highContrastAvatar}" alt="High Contrast Avatar" />
-              <p>High Contrast</p>
+              <img src="${lightVariantAvatar}" alt="Light Variant Avatar" />
+              <p>Light Variant</p>
             </div>
             <div class="avatar-container">
-              <img src="${lowContrastAvatar}" alt="Low Contrast Avatar" />
-              <p>Low Contrast</p>
+              <img src="${darkVariantAvatar}" alt="Dark Variant Avatar" />
+              <p>Dark Variant</p>
             </div>
           </div>
         </div>
       `;
 
       // --- Markdown Asset Generation (for PREVIEW.md) ---
-      const highContrastFileName = `${style.name}-${palette.name}-high.svg`;
-      const lowContrastFileName = `${style.name}-${palette.name}-low.svg`;
-      fs.writeFileSync(path.join(ASSETS_DIR, highContrastFileName), decodeBase64Svg(highContrastAvatar));
-      fs.writeFileSync(path.join(ASSETS_DIR, lowContrastFileName), decodeBase64Svg(lowContrastAvatar));
+      const lightVariantFileName = `${style.name}-${palette.name}-light.svg`;
+      const darkVariantFileName = `${style.name}-${palette.name}-dark.svg`;
+      fs.writeFileSync(path.join(ASSETS_DIR, lightVariantFileName), decodeBase64Svg(lightVariantAvatar));
+      fs.writeFileSync(path.join(ASSETS_DIR, darkVariantFileName), decodeBase64Svg(darkVariantAvatar));
 
       // Build a single cell for the Markdown table containing both images
-      const highContrastImageMd = `<img src="./${ASSETS_DIR}/${highContrastFileName}" alt="${palette.name} High Contrast" width="${MARKDOWN_IMAGE_SIZE}">`;
-      const lowContrastImageMd = `<img src="./${ASSETS_DIR}/${lowContrastFileName}" alt="${palette.name} Low Contrast" width="${MARKDOWN_IMAGE_SIZE}">`;
-      mdRow += ` ${highContrastImageMd}<br/><sub>High Contrast</sub><br/><br/>${lowContrastImageMd}<br/><sub>Low Contrast</sub> |`;
+      const lightVariantImageMd = `<img src="./${ASSETS_DIR}/${lightVariantFileName}" alt="${palette.name} Light Variant" width="${MARKDOWN_IMAGE_SIZE}">`;
+      const darkVariantImageMd = `<img src="./${ASSETS_DIR}/${darkVariantFileName}" alt="${palette.name} Dark Variant" width="${MARKDOWN_IMAGE_SIZE}">`;
+      mdRow += ` ${lightVariantImageMd}<br/><sub>Light Variant</sub><br/><br/>${darkVariantImageMd}<br/><sub>Dark Variant</sub> |`;
     });
 
     // --- Assemble HTML Section ---
@@ -179,7 +179,7 @@ function createPreview() {
                     return;
                 }
 
-                const commandToCopy = 'npm run preview -- "' + newSeed + '"';
+                const commandToCopy = 'npm run preview:styles -- "' + newSeed + '"';
                 
                 const textArea = document.createElement('textarea');
                 textArea.value = commandToCopy;
@@ -205,7 +205,7 @@ function createPreview() {
   console.log(`✅ HTML style guide generated! Open ${HTML_OUTPUT_FILE} in your browser.`);
 
   // --- Assemble and Write Markdown File ---
-  const markdownContent = `## 🎨 Available Styles & Palettes\n\nThis table shows a preview for each style combined with each palette in both high and low contrast modes.\n\n${markdownTable}`;
+  const markdownContent = `## 🖼️ Available Styles & Palettes\n\nThis table shows a preview for each style combined with each palette in both light and dark variants.\n\n${markdownTable}`;
   const mdOutputPath = path.join(process.cwd(), MD_OUTPUT_FILE);
   fs.writeFileSync(mdOutputPath, markdownContent);
   console.log(`✅ Markdown preview generated! See ${MD_OUTPUT_FILE}.`);

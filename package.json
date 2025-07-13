@@ -19,7 +19,9 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
-    "preview": "npm run build && node dist/scripts/generate-preview.js",
+    "preview:styles": "npm run build && node dist/scripts/generate-styles-preview.js",
+    "preview:palettes": "npm run build && node dist/scripts/generate-palettes-preview.js",
+    "preview": "npm run preview:styles & npm run preview:palettes",
     "prepare": "npm run build"
   },
   "repository": {

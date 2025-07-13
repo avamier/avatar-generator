@@ -5,8 +5,10 @@
 /dist
 
 # Development preview file
-/preview.html
-/PREVIEW.md
+/styles.html
+/STYLES.md
+/palettes.html
+/PALETTES.md
 
 # Log files
 npm-debug.log*
