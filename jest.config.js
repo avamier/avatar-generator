@@ -15,4 +15,6 @@ export default {
       },
     ],
   },
+  // Add this line to ignore the dist directory for tests
+  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
 };
