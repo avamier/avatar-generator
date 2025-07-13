@@ -18,13 +18,13 @@ function createPalettePreview() {
   console.log('Generating color palette previews...');
 
   let htmlSections = '';
-  let markdownSections = '';
+  let markdownTableRows = '';
 
   // --- Main Loop for Generating HTML and Markdown ---
   allPalettes.forEach((palette) => {
     const colors = [...palette.colors];
 
-    // --- HTML Generation ---
+    // --- HTML Generation (Remains the same) ---
     let swatchesHtml = '';
     colors.forEach((color) => {
       swatchesHtml += `
@@ -44,20 +44,17 @@ function createPalettePreview() {
       </section>
     `;
 
-    // --- Markdown Generation ---
-    let markdownTable = `| Color | Hex Code |\n|:---:|:---:|\n`;
-    colors.forEach((color) => {
-      const swatchImage = `<img src="https://placehold.co/20x20/${color.substring(
-        1
-      )}/${color.substring(1)}.png" alt="${color}">`;
-      markdownTable += `| ${swatchImage} | \`${color}\` |\n`;
-    });
+    // --- Markdown Generation (Refactored for a single table) ---
+    const markdownSwatches = colors
+      .map(
+        (color) =>
+          `<img src="https://placehold.co/20x20/${color.substring(
+            1
+          )}/${color.substring(1)}.png" alt="${color}" title="${color}">`
+      )
+      .join(' ');
 
-    markdownSections += `
-### ${palette.name}
-
-${markdownTable}
-`;
+    markdownTableRows += `| \`${palette.name}\` | ${markdownSwatches} |\n`;
   });
 
   // --- Assemble and Write HTML File ---
@@ -96,7 +93,7 @@ ${markdownTable}
   );
 
   // --- Assemble and Write Markdown File ---
-  const markdownContent = `## 🎨 Available Color Palettes\n\nThis document shows a preview for each available color palette.\n\n${markdownSections}`;
+  const markdownContent = `## 🎨 Available Color Palettes\n\nThis document shows a preview for each available color palette.\n\n| Palette | Colors |\n|:---|:---|\n${markdownTableRows}`;
   const mdOutputPath = path.join(process.cwd(), MD_OUTPUT_FILE);
   fs.writeFileSync(mdOutputPath, markdownContent);
   console.log(`✅ Markdown palette preview generated! See ${MD_OUTPUT_FILE}.`);
