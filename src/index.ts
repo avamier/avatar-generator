@@ -39,7 +39,6 @@ export function registerPalette(palette: ColorPalette) {
 allStyles.forEach(registerStyle);
 allPalettes.forEach(registerPalette);
 
-
 // --- HELPER FUNCTION ---
 const simpleHash = (str: string): number => {
   let hash = 0;
@@ -51,10 +50,27 @@ const simpleHash = (str: string): number => {
   return Math.abs(hash); // Return a non-negative hash value
 };
 
+// Defines the public-facing options for the main generateAvatar function.
+type PublicAvatarOptions = {
+  type?: string;
+  size?: number;
+  palette?: string;
+  variant?: 'light' | 'dark';
+  displayName?: string;
+};
 
 // --- MAIN EXPORTED FUNCTION ---
-export const generateAvatar = (seed: string, options: AvatarOptions = {}): string => {
-  const { type = 'block', size = 100, palette = 'monokai', contrast = 'high' } = options;
+export const generateAvatar = (
+  seed: string,
+  options: PublicAvatarOptions = {}
+): string => {
+  const {
+    type = 'block',
+    size = 100,
+    palette: paletteName = 'cool',
+    variant = 'light',
+    displayName,
+  } = options;
 
   if (!seed) {
     const placeholderSvg = `<svg width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#cccccc"/></svg>`;
@@ -66,17 +82,21 @@ export const generateAvatar = (seed: string, options: AvatarOptions = {}): strin
   const style = styleRegistry.get(type);
   if (!style) throw new Error(`Avatar style "${type}" not found.`);
 
-  const selectedPalette = paletteRegistry.get(palette);
-  if (!selectedPalette) throw new Error(`Color palette "${palette}" not found.`);
+  const selectedPalette = paletteRegistry.get(paletteName);
+  if (!selectedPalette)
+    throw new Error(`Color palette "${paletteName}" not found.`);
 
-  // 2. Select the correct contrast colors from the chosen palette
-  const colors = contrast === 'high' ? selectedPalette.high : selectedPalette.low;
-
-  // 3. Generate the hash and pass all necessary data to the style's generate function
+  // 2. Generate the hash and pass all necessary data to the style's generate function
   const hash = simpleHash(seed);
-  const svgContent = style.generate(hash, colors, options);
+  const svgContent = style.generate(hash, {
+    seed,
+    size,
+    palette: selectedPalette,
+    variant,
+    displayName,
+  });
 
-  // 4. Return the final SVG as a data URI
+  // 3. Return the final SVG as a data URI
   const base64Svg = Buffer.from(svgContent).toString('base64');
   return `data:image/svg+xml;base64,${base64Svg}`;
 };

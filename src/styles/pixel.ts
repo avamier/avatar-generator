@@ -1,29 +1,37 @@
 /**
- * @file Defines the 'pixel' avatar style.
- * @description This style generates a symmetrical, pixel-art pattern.
+ * @file src/styles/pixel.ts
+ * @description Defines the 'pixel' avatar style.
  */
-import { AvatarStyle, AvatarOptions } from '../types.js';
+import { AvatarStyle as PixelAvatarStyle, AvatarOptions as PixelAvatarOptions } from '../types.js';
+import { getLuminance as getPixelLuminance } from './utils.js';
 
-const generatePixel = (hash: number, palette: string[], options: AvatarOptions): string => {
-    const { size = 100 } = options;
+const generatePixel = (hash: number, options: PixelAvatarOptions): string => {
+    const { size = 100, palette, variant = 'light' } = options;
+
+    const allColors = [...palette.colors].sort((a, b) => getPixelLuminance(a) - getPixelLuminance(b));
+    const backgroundColor = variant === 'light' ? allColors[allColors.length - 1] : allColors[0];
+    const foregroundColors = allColors.filter(c => c !== backgroundColor);
+
+    if (foregroundColors.length === 0) {
+      return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" style="background-color: ${backgroundColor};"></svg>`;
+    }
+
     const gridSize = 8;
     const cellSize = size / gridSize;
     let svgRects = '';
 
     for (let y = 0; y < gridSize; y++) {
-        for (let x = 0; x < Math.ceil(gridSize / 2); x++) {
-            const cellHash = (hash >> (y * 4 + x)) & 0b111; // Use 3 bits for more variety
-            if (cellHash > 1) { // 0 and 1 will be empty cells
-                const color = palette[cellHash % palette.length];
+        for (let x = 0; x < gridSize; x++) {
+            const bitIndex = y * gridSize + x;
+            if ((hash >> (bitIndex % 32)) & 1) {
+                const colorIndex = (hash >> (bitIndex % 8)) % foregroundColors.length;
+                const color = foregroundColors[colorIndex];
                 svgRects += `<rect x="${x * cellSize}" y="${y * cellSize}" width="${cellSize}" height="${cellSize}" fill="${color}" />`;
-                if (x < Math.floor(gridSize / 2)) {
-                    svgRects += `<rect x="${(gridSize - 1 - x) * cellSize}" y="${y * cellSize}" width="${cellSize}" height="${cellSize}" fill="${color}" />`;
-                }
             }
         }
     }
-    return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" style="background-color: #f0f0f0;">${svgRects}</svg>`;
+
+    return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" style="background-color: ${backgroundColor};">${svgRects}</svg>`;
 };
 
-export const pixelStyle: AvatarStyle = { name: 'pixel', generate: generatePixel };
-
+export const pixel: PixelAvatarStyle = { name: 'pixel', generate: generatePixel };

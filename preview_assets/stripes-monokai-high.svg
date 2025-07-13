@@ -1,9 +1,9 @@
 
         <svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <pattern id="stripe-pattern" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(90)">
-                    <rect width="11" height="22" fill="#FD971F"/>
-                    <rect x="11" width="11" height="22" fill="#AE81FF"/>
+                <pattern id="stripe-pattern" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(99)">
+                    <rect width="8" height="16" fill="#FD971F"/>
+                    <rect x="8" width="8" height="16" fill="#AE81FF"/>
                 </pattern>
             </defs>
             <rect width="150" height="150" fill="url(#stripe-pattern)" />

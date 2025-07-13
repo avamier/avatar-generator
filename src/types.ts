@@ -1,33 +1,24 @@
 /**
- * @file Defines the core types and interfaces for the avatar generator package.
+ * @file Defines the core types for the avatar generator.
  */
 
-/**
- * Defines the shape for a color palette.
- * Each palette must provide arrays for low and high contrast modes.
- */
 export interface ColorPalette {
   name: string;
-  low: string[];
-  high: string[];
+  colors: string[];
 }
 
-/**
- * Defines the options that can be passed to the main generateAvatar function.
- */
 export interface AvatarOptions {
-  type?: string;
+  seed?: string;
   size?: number;
-  palette?: string;
-  contrast?: 'low' | 'high';
-  displayName?: string; // Optional display name for styles like 'initials'
+  palette: ColorPalette;
+  variant?: 'light' | 'dark';
+  displayName?: string;
 }
 
-/**
- * Defines the shape that every avatar style must adhere to.
- */
 export interface AvatarStyle {
   name: string;
-  // The generate function now receives the full options object
-  generate: (hash: number, palette: string[], options: AvatarOptions) => string;
+  generate: (
+    hash: number,
+    options: AvatarOptions
+  ) => string;
 }

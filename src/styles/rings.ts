@@ -1,25 +1,40 @@
 /**
- * @file Defines the 'rings' avatar style.
- * @description This style generates a set of concentric rings with varying stroke widths.
+ * @file src/styles/rings.ts
+ * @description Defines the 'rings' avatar style.
  */
 import { AvatarStyle, AvatarOptions } from '../types.js';
+import { getLuminance } from './utils.js';
 
-const generateRings = (hash: number, palette: string[], options: AvatarOptions): string => {
-    const { size = 100 } = options;
-    const [color1, color2, color3] = palette;
-    const ringCount = 4 + (hash % 3);
-    const center = size / 2;
-    const maxRadius = size / 2;
-    let svgCircles = `<rect width="${size}" height="${size}" fill="${color3}" />`;
+const generateRings = (hash: number, options: AvatarOptions): string => {
+    const { size = 100, palette, variant = 'light' } = options;
 
-    for (let i = 0; i < ringCount; i++) {
-        const radius = maxRadius * (1 - i / ringCount);
-        const strokeColor = i % 2 === 0 ? color1 : color2;
-        const strokeWidth = (maxRadius / ringCount) * (0.6 + ((hash >> i) & 1) * 0.4);
-        svgCircles += `<circle cx="${center}" cy="${center}" r="${radius}" fill="none" stroke="${strokeColor}" stroke-width="${strokeWidth}" />`;
+    const allColors = [...palette.colors].sort((a, b) => getLuminance(a) - getLuminance(b));
+    const backgroundColor = variant === 'light' ? allColors[allColors.length - 1] : allColors[0];
+    const foregroundColors = allColors.filter(c => c !== backgroundColor);
+
+    if (foregroundColors.length === 0) {
+      return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" style="background-color: ${backgroundColor};"></svg>`;
     }
 
-    return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">${svgCircles}</svg>`;
+    let circles = '';
+    const numRings = (hash % 4) + 3; // 3 to 6 rings, same as stripes
+    const maxRadius = size / 2;
+
+    // Draw circles from largest to smallest to create the concentric effect
+    for (let i = 0; i < numRings; i++) {
+        // Use the same color selection logic as stripes for more variety
+        const colorIndex = (hash >> i) % foregroundColors.length;
+        const color = foregroundColors[colorIndex];
+        
+        // The largest ring is drawn first, then smaller ones on top
+        const radius = maxRadius * (1 - i / numRings);
+
+        if (radius > 0) {
+            circles += `<circle cx="${size / 2}" cy="${size / 2}" r="${radius}" fill="${color}" />`;
+        }
+    }
+
+    return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" style="background-color: ${backgroundColor};">${circles}</svg>`;
 };
 
-export const ringsStyle: AvatarStyle = { name: 'rings', generate: generateRings };
+export const rings: AvatarStyle = { name: 'rings', generate: generateRings };

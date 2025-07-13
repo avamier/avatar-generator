@@ -4,24 +4,24 @@
  */
 
 import { AvatarStyle } from '../types.js';
-import { blockStyle } from './block.js';
-import { gradientStyle } from './gradient.js';
-import { ringsStyle } from './rings.js';
-import { stripesStyle } from './stripes.js';
-import { nebulaStyle } from './nebula.js';
-import { polygonStyle } from './polygon.js';
-import { bauhausStyle } from './bauhaus.js';
-import { pixelStyle } from './pixel.js';
-import { initialsStyle } from './initials.js';
+import { block } from './block.js';
+import { gradient } from './gradient.js';
+import { rings } from './rings.js';
+import { stripes } from './stripes.js';
+import { nebula } from './nebula.js';
+import { polygon } from './polygon.js';
+import { bauhaus } from './bauhaus.js';
+import { pixel } from './pixel.js';
+import { initials } from './initials.js';
 
 export const allStyles: AvatarStyle[] = [
-  blockStyle,
-  gradientStyle,
-  ringsStyle,
-  stripesStyle,
-  nebulaStyle,
-  polygonStyle,
-  bauhausStyle,
-  pixelStyle,
-  initialsStyle,
+  block,
+  gradient,
+  rings,
+  stripes,
+  nebula,
+  polygon,
+  bauhaus,
+  pixel,
+  initials,
 ];
