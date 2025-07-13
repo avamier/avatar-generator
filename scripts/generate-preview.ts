@@ -12,7 +12,8 @@ import * as path from 'path';
 
 // --- CONFIGURATION ---
 const PREVIEW_SEED = process.argv[2] || 'live-preview-seed-string';
-const PREVIEW_SIZE = 150;
+const HTML_PREVIEW_SIZE = 150; // Size for the interactive HTML preview
+const MARKDOWN_IMAGE_SIZE = 100; // A smaller, more compact size for the README
 const HTML_OUTPUT_FILE = 'preview.html';
 const MD_OUTPUT_FILE = 'PREVIEW.md';
 const ASSETS_DIR = 'preview_assets';
@@ -72,14 +73,14 @@ function createPreview() {
         type: style.name,
         palette: palette.name,
         contrast: 'high',
-        size: PREVIEW_SIZE,
+        size: HTML_PREVIEW_SIZE,
         displayName: 'Ava Mier',
       });
       const lowContrastAvatar = generateAvatar(PREVIEW_SEED, {
         type: style.name,
         palette: palette.name,
         contrast: 'low',
-        size: PREVIEW_SIZE,
+        size: HTML_PREVIEW_SIZE,
         displayName: 'Ava Mier',
       });
 
@@ -107,8 +108,8 @@ function createPreview() {
       fs.writeFileSync(path.join(ASSETS_DIR, lowContrastFileName), decodeBase64Svg(lowContrastAvatar));
 
       // Build a single cell for the Markdown table containing both images
-      const highContrastImageMd = `![${palette.name} High Contrast](./${ASSETS_DIR}/${highContrastFileName})`;
-      const lowContrastImageMd = `![${palette.name} Low Contrast](./${ASSETS_DIR}/${lowContrastFileName})`;
+      const highContrastImageMd = `<img src="./${ASSETS_DIR}/${highContrastFileName}" alt="${palette.name} High Contrast" width="${MARKDOWN_IMAGE_SIZE}">`;
+      const lowContrastImageMd = `<img src="./${ASSETS_DIR}/${lowContrastFileName}" alt="${palette.name} Low Contrast" width="${MARKDOWN_IMAGE_SIZE}">`;
       mdRow += ` ${highContrastImageMd}<br/><sub>High Contrast</sub><br/><br/>${lowContrastImageMd}<br/><sub>Low Contrast</sub> |`;
     });
 
@@ -151,7 +152,7 @@ function createPreview() {
         .palette-name { text-align: center; font-size: 1.25rem; margin-top: 0; margin-bottom: 1rem; color: #c4b5fd; text-transform: capitalize; }
         .avatar-pair { display: flex; justify-content: space-around; align-items: center; gap: 1rem; }
         .avatar-container { text-align: center; }
-        .avatar-container img { border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); width: ${PREVIEW_SIZE}px; height: ${PREVIEW_SIZE}px; }
+        .avatar-container img { border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); width: ${HTML_PREVIEW_SIZE}px; height: ${HTML_PREVIEW_SIZE}px; }
         .avatar-container p { font-size: 0.8rem; color: #888; margin-top: 0.5rem; }
       </style>
     </head>
