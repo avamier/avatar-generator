@@ -1,6 +1,6 @@
 {
   "name": "@avamier/deterministic-avatar-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight, zero-dependency SVG avatar generator for Node.js and browsers.",
   "type": "module",
   "main": "./dist/src/index.js",
