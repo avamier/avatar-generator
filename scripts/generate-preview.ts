@@ -42,17 +42,30 @@ function createPreview() {
     console.log(`Created assets directory: ./${ASSETS_DIR}`);
   }
 
-  let sectionsHtml = '';
-  let markdownTable = `| Style | Palette (High Contrast) | Palette (Low Contrast) |\n`;
-  markdownTable += `|:---:|:---:|:---:|\n`;
+  let sectionsHtml = ''; // For the HTML file
 
-  // Loop through each style to create a section
+  // --- Refactored Markdown Table Generation ---
+
+  // 1. Build the header row with palette names
+  let mdHeader = `| Style |`;
+  allPalettes.forEach(palette => {
+    mdHeader += ` ${palette.name} |`;
+  });
+
+  // 2. Build the separator row
+  let mdSeparator = `|:---:|`;
+  allPalettes.forEach(() => {
+    mdSeparator += `:---:|`;
+  });
+
+  let markdownTable = `${mdHeader}\n${mdSeparator}\n`;
+
+  // --- Main Loop for Generating HTML and Markdown ---
   allStyles.forEach(style => {
-    let palettesHtml = '';
-    let mdHighContrastRow = `| **${style.name}** |`;
-    let mdLowContrastRow = `| |`; // Empty cell for style name on the second row
+    let palettesHtml = ''; // For the HTML file
+    let mdRow = `| **${style.name}** |`; // Start a new row for the Markdown table
 
-    // Inside each style section, loop through each palette
+    // Loop through each palette to generate avatars and build the row/section content
     allPalettes.forEach(palette => {
       // --- Generate Avatars ---
       const highContrastAvatar = generateAvatar(PREVIEW_SEED, {
@@ -70,7 +83,7 @@ function createPreview() {
         displayName: 'Ava Mier',
       });
 
-      // --- HTML Generation ---
+      // --- HTML Generation (for preview.html) ---
       palettesHtml += `
         <div class="palette-group">
           <h3 class="palette-name">${palette.name}</h3>
@@ -87,16 +100,19 @@ function createPreview() {
         </div>
       `;
 
-      // --- Markdown Asset Generation ---
+      // --- Markdown Asset Generation (for PREVIEW.md) ---
       const highContrastFileName = `${style.name}-${palette.name}-high.svg`;
       const lowContrastFileName = `${style.name}-${palette.name}-low.svg`;
       fs.writeFileSync(path.join(ASSETS_DIR, highContrastFileName), decodeBase64Svg(highContrastAvatar));
       fs.writeFileSync(path.join(ASSETS_DIR, lowContrastFileName), decodeBase64Svg(lowContrastAvatar));
 
-      mdHighContrastRow += ` ![${palette.name} High Contrast](./${ASSETS_DIR}/${highContrastFileName}) |`;
-      mdLowContrastRow += ` ![${palette.name} Low Contrast](./${ASSETS_DIR}/${lowContrastFileName}) |`;
+      // Build a single cell for the Markdown table containing both images
+      const highContrastImageMd = `![${palette.name} High Contrast](./${ASSETS_DIR}/${highContrastFileName})`;
+      const lowContrastImageMd = `![${palette.name} Low Contrast](./${ASSETS_DIR}/${lowContrastFileName})`;
+      mdRow += ` ${highContrastImageMd}<br/><sub>High Contrast</sub><br/><br/>${lowContrastImageMd}<br/><sub>Low Contrast</sub> |`;
     });
 
+    // --- Assemble HTML Section ---
     sectionsHtml += `
       <section class="style-section">
         <h2 class="style-name">${style.name}</h2>
@@ -105,7 +121,9 @@ function createPreview() {
         </div>
       </section>
     `;
-    markdownTable += `${mdHighContrastRow}\n${mdLowContrastRow}\n`;
+    
+    // --- Add Completed Row to Markdown Table ---
+    markdownTable += `${mdRow}\n`;
   });
 
   // --- Assemble and Write HTML File ---
@@ -186,7 +204,7 @@ function createPreview() {
   console.log(`✅ HTML style guide generated! Open ${HTML_OUTPUT_FILE} in your browser.`);
 
   // --- Assemble and Write Markdown File ---
-  const markdownContent = `## Avatar Previews\n\nThis table shows a preview for each style combined with each palette in both high and low contrast modes.\n\n${markdownTable}`;
+  const markdownContent = `## 🎨 Available Styles & Palettes\n\nThis table shows a preview for each style combined with each palette in both high and low contrast modes.\n\n${markdownTable}`;
   const mdOutputPath = path.join(process.cwd(), MD_OUTPUT_FILE);
   fs.writeFileSync(mdOutputPath, markdownContent);
   console.log(`✅ Markdown preview generated! See ${MD_OUTPUT_FILE}.`);
