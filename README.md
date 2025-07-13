@@ -76,7 +76,7 @@ const initialsAvatar = generateAvatar(seed, {
   type: 'initials',
   size: 250,
   variant: 'dark',
-  displayName: 'Ava Mier'
+  displayName: 'User Name'
 });
 
 // You can now use this data URI directly in an image tag:

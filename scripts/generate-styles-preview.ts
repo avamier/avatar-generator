@@ -11,7 +11,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // --- CONFIGURATION ---
-const PREVIEW_SEED = process.argv[2] || 'live-preview-seed-string';
+const PREVIEW_SEED = process.argv[2] || 'username';
 const HTML_PREVIEW_SIZE = 150; // Size for the interactive HTML preview
 const MARKDOWN_IMAGE_SIZE = 100; // A smaller, more compact size for the README
 const HTML_OUTPUT_FILE = 'styles.html';
@@ -74,14 +74,14 @@ function createPreview() {
         palette: palette.name,
         variant: 'light',
         size: HTML_PREVIEW_SIZE,
-        displayName: 'Ava Mier',
+        displayName: 'User Name',
       });
       const darkVariantAvatar = generateAvatar(PREVIEW_SEED, {
         type: style.name,
         palette: palette.name,
         variant: 'dark',
         size: HTML_PREVIEW_SIZE,
-        displayName: 'Ava Mier',
+        displayName: 'User Name',
       });
 
       // --- HTML Generation (for preview.html) ---
