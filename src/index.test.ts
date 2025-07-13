@@ -20,6 +20,46 @@ describe('Avatar Generator Core', () => {
   });
 });
 
+// --- Test for Custom Extensibility ---
+describe('Custom Registration', () => {
+  it('should allow registering and using a new custom style', () => {
+    // 1. Define the checkerboard custom style
+    const checkerboardStyle: AvatarStyle = {
+      name: 'checkerboard',
+      generate: (hash: number, palette: string[], options) => {
+        const { size = 100 } = options;
+        const [color1, color2] = palette;
+        const cellSize = size / 8;
+        let rects = '';
+
+        for (let y = 0; y < 8; y++) {
+          for (let x = 0; x < 8; x++) {
+            const color = (x + y) % 2 === 0 ? color1 : color2;
+            rects += `<rect x="${x * cellSize}" y="${y * cellSize}" width="${cellSize}" height="${cellSize}" fill="${color}" />`;
+          }
+        }
+        return `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">${rects}</svg>`;
+      },
+    };
+
+    // 2. Register the new style
+    registerStyle(checkerboardStyle);
+
+    // 3. Generate an avatar using the custom style
+    const avatar = generateAvatar('custom-seed', {
+      type: 'checkerboard',
+      palette: 'grayscale', // Using a simple palette for predictable colors
+    });
+
+    // 4. Assert that the output is what we expect
+    // This snapshot will capture the full output of our custom style.
+    expect(avatar).toMatchSnapshot();
+    // Also, explicitly check that the output is a valid data URI.
+    expect(avatar).toEqual(expect.stringMatching(/^data:image\/svg\+xml;base64,/));
+  });
+});
+
+
 // --- Automated Style & Palette Combination Testing ---
 // This will automatically run a snapshot test for every possible combination
 // of the built-in styles and palettes.
