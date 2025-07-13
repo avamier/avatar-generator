@@ -1,18 +1,18 @@
-# Source files
-src/
+# Source and config files
+/src
+/scripts
+.gitignore
+jest.config.js
+tsconfig.json
+package-lock.json
 
 # Test files
 *.test.ts
 
-# Configuration files
-jest.config.js
-tsconfig.json
+# Preview artifacts
+/preview_assets
+/preview.html
+/PREVIEW.md
 
-# Scripts
-scripts/
-
-# Preview files
-preview/
-
-# Git files
-.gitignore
+# Do NOT ignore the build output
+!/dist

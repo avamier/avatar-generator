@@ -2,16 +2,25 @@
   "name": "@avamier/avatar-generator",
   "version": "1.0.0",
   "description": "A lightweight, zero-dependency SVG avatar generator for Node.js and browsers.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "type": "module",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
   "scripts": {
-    "build": "tsc",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "preview": "tsc && node dist/scripts/generate-preview.js"
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "preview": "npm run build && node dist/scripts/generate-preview.js",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
