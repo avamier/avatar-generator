@@ -93,7 +93,7 @@ function createPalettePreview() {
   );
 
   // --- Assemble and Write Markdown File ---
-  const markdownContent = `## 🎨 Available Color Palettes\n\nThis document shows a preview for each available color palette.\n\n| Palette | Colors |\n|:---|:---|\n${markdownTableRows}`;
+  const markdownContent = `### Color Palettes\n\nThis table provides a detailed look at each individual color palette.\n\n| Palette | Colors |\n|:---|:---|\n${markdownTableRows}`;
   const mdOutputPath = path.join(process.cwd(), MD_OUTPUT_FILE);
   fs.writeFileSync(mdOutputPath, markdownContent);
   console.log(`✅ Markdown palette preview generated! See ${MD_OUTPUT_FILE}.`);

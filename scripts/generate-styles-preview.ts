@@ -11,7 +11,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // --- CONFIGURATION ---
-const PREVIEW_SEED = process.argv[2] || 'live-preview-seed-string';
+const PREVIEW_SEED = process.argv[2] || 'username';
 const HTML_PREVIEW_SIZE = 150; // Size for the interactive HTML preview
 const MARKDOWN_IMAGE_SIZE = 100; // A smaller, more compact size for the README
 const HTML_OUTPUT_FILE = 'styles.html';
@@ -74,14 +74,14 @@ function createPreview() {
         palette: palette.name,
         variant: 'light',
         size: HTML_PREVIEW_SIZE,
-        displayName: 'Ava Mier',
+        displayName: 'User Name',
       });
       const darkVariantAvatar = generateAvatar(PREVIEW_SEED, {
         type: style.name,
         palette: palette.name,
         variant: 'dark',
         size: HTML_PREVIEW_SIZE,
-        displayName: 'Ava Mier',
+        displayName: 'User Name',
       });
 
       // --- HTML Generation (for preview.html) ---
@@ -205,7 +205,7 @@ function createPreview() {
   console.log(`✅ HTML style guide generated! Open ${HTML_OUTPUT_FILE} in your browser.`);
 
   // --- Assemble and Write Markdown File ---
-  const markdownContent = `## 🖼️ Available Styles & Palettes\n\nThis table shows a preview for each style combined with each palette in both light and dark variants.\n\n${markdownTable}`;
+  const markdownContent = `### Style & Palette Combinations\n\nThe following table shows a preview for each style combined with each available color palette in both its \`light\` and \`dark\` variants.\n\n${markdownTable}`;
   const mdOutputPath = path.join(process.cwd(), MD_OUTPUT_FILE);
   fs.writeFileSync(mdOutputPath, markdownContent);
   console.log(`✅ Markdown preview generated! See ${MD_OUTPUT_FILE}.`);

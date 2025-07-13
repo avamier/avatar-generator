@@ -12,9 +12,13 @@ This package is designed to be extensible, allowing developers to register their
   - **Zero Dependencies:** Runs in any Node.js or browser environment without needing external packages.
   - **SVG Output:** Generates a clean, scalable SVG image as a Base64 data URI, perfect for use in `<img>` tags.
 
-## 🎨 Available Color Palettes
+## 🎨 Previews
 
-This document shows a preview for each available color palette.
+A visual guide to all built-in styles and color palettes.
+
+### Color Palettes
+
+This table provides a detailed look at each individual color palette.
 
 | Palette | Colors |
 |:---|:---|
@@ -25,9 +29,9 @@ This document shows a preview for each available color palette.
 | `cool` | <img src="https://placehold.co/20x20/09186D/09186D.png" alt="#09186D" title="#09186D"> <img src="https://placehold.co/20x20/2B3252/2B3252.png" alt="#2B3252" title="#2B3252"> <img src="https://placehold.co/20x20/3D155F/3D155F.png" alt="#3D155F" title="#3D155F"> <img src="https://placehold.co/20x20/021c41/021c41.png" alt="#021c41" title="#021c41"> <img src="https://placehold.co/20x20/4D4C53/4D4C53.png" alt="#4D4C53" title="#4D4C53"> <img src="https://placehold.co/20x20/8AAAE5/8AAAE5.png" alt="#8AAAE5" title="#8AAAE5"> <img src="https://placehold.co/20x20/bde8f1/bde8f1.png" alt="#bde8f1" title="#bde8f1"> <img src="https://placehold.co/20x20/819fa7/819fa7.png" alt="#819fa7" title="#819fa7"> <img src="https://placehold.co/20x20/CDC6B4/CDC6B4.png" alt="#CDC6B4" title="#CDC6B4"> <img src="https://placehold.co/20x20/dfe5f3/dfe5f3.png" alt="#dfe5f3" title="#dfe5f3"> |
 | `grayscale` | <img src="https://placehold.co/20x20/222222/222222.png" alt="#222222" title="#222222"> <img src="https://placehold.co/20x20/333333/333333.png" alt="#333333" title="#333333"> <img src="https://placehold.co/20x20/444444/444444.png" alt="#444444" title="#444444"> <img src="https://placehold.co/20x20/555555/555555.png" alt="#555555" title="#555555"> <img src="https://placehold.co/20x20/666666/666666.png" alt="#666666" title="#666666"> <img src="https://placehold.co/20x20/eeeeee/eeeeee.png" alt="#eeeeee" title="#eeeeee"> <img src="https://placehold.co/20x20/dddddd/dddddd.png" alt="#dddddd" title="#dddddd"> <img src="https://placehold.co/20x20/cccccc/cccccc.png" alt="#cccccc" title="#cccccc"> <img src="https://placehold.co/20x20/bbbbbb/bbbbbb.png" alt="#bbbbbb" title="#bbbbbb"> <img src="https://placehold.co/20x20/aaaaaa/aaaaaa.png" alt="#aaaaaa" title="#aaaaaa"> |
 
-## 🖼️ Available Styles & Palettes
+### Style & Palette Combinations
 
-This table shows a preview for each style combined with each palette in both light and dark variants.
+The following table shows a preview for each style combined with each available color palette in both its `light` and `dark` variants.
 
 | Style | monokai | pride | muted | warm | cool | grayscale |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -71,7 +75,7 @@ const initialsAvatar = generateAvatar(seed, {
   type: 'initials',
   size: 250,
   variant: 'dark',
-  displayName: 'Ava Mier'
+  displayName: 'User Name'
 });
 
 // You can now use this data URI directly in an image tag:
@@ -134,8 +138,8 @@ This project is written in TypeScript and includes a testing suite and live prev
 
 ### Prerequisites
 
-  * Node.js and npm
-  * TypeScript
+  - Node.js and npm
+  - TypeScript
 
 ### Local Setup
 
