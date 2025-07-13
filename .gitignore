@@ -6,6 +6,7 @@
 
 # Development preview file
 /preview.html
+/PREVIEW.md
 
 # Log files
 npm-debug.log*

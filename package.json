@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "preview": "node --loader ts-node/esm scripts/generate-preview.ts"
+    "preview": "tsc && node dist/scripts/generate-preview.js"
   },
   "repository": {
     "type": "git",

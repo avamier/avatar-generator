@@ -1,0 +1,12 @@
+
+        <svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="poly-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#F1DEC9" />
+                    <stop offset="100%" stop-color="#C8B6A6" />
+                </linearGradient>
+            </defs>
+            <rect width="150" height="150" fill="#A4907C" />
+            <polygon points="122.72970773009196,122.72970773009195 75,142.5 27.270292269908047,122.72970773009196 7.5,75.00000000000001 27.270292269908033,27.270292269908047 74.99999999999999,7.5 122.72970773009195,27.270292269908033 142.5,74.99999999999999" fill="url(#poly-grad)" />
+        </svg>
+    

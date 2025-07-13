@@ -1,0 +1,12 @@
+
+        <svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="simple-grad" gradientTransform="rotate(135)">
+                    <stop offset="0%" stop-color="#5BCEFA" />
+                    <stop offset="50%" stop-color="#F5A9B8" />
+                    <stop offset="100%" stop-color="#FFFFFF" />
+                </linearGradient>
+            </defs>
+            <rect width="150" height="150" fill="url(#simple-grad)" />
+        </svg>
+    
