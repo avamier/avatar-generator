@@ -44,7 +44,7 @@ This table shows a preview for each style combined with each palette in both lig
 ## 📦 Installation
 
 ```bash
-npm install @avamier/avatar-generator
+npm install @avamier/deterministic-avatar-generator
 ```
 
 ## 🚀 Usage
@@ -56,7 +56,7 @@ The package exports three main functions: `generateAvatar`, `registerStyle`, and
 To generate an avatar, import `generateAvatar` and provide a seed string. You can optionally specify a `type`, `palette`, `variant`, `size`, and `displayName`.
 
 ```typescript
-import { generateAvatar } from '@avamier/avatar-generator';
+import { generateAvatar } from '@avamier/deterministic-avatar-generator';
 
 const seed = 'a-unique-user-seed-string';
 
@@ -87,7 +87,7 @@ Create a file for your style. It must export an object that conforms to the `Ava
 
 ```typescript
 // my-app/src/styles/custom-checkerboard.ts
-import { AvatarStyle, AvatarOptions } from '@avamier/avatar-generator';
+import { AvatarStyle, AvatarOptions } from '@avamier/deterministic-avatar-generator';
 
 const generateCheckerboard = (hash: number, options: AvatarOptions): string => {
   const { size = 100, palette } = options;
@@ -115,7 +115,7 @@ In your application's main entry point (e.g., `main.tsx` or `App.tsx`), import a
 
 ```typescript
 // my-app/src/main.tsx
-import { registerStyle } from '@avamier/avatar-generator';
+import { registerStyle } from '@avamier/deterministic-avatar-generator';
 import { checkerboardStyle } from './styles/custom-checkerboard';
 
 registerStyle(checkerboardStyle);
@@ -142,8 +142,8 @@ This project is written in TypeScript and includes a testing suite and live prev
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/avamier/avatar-generator.git
-    cd avatar-generator
+    git clone https://github.com/avamier/deterministic-avatar-generator.git
+    cd deterministic-avatar-generator
     ```
 
 2.  **Install dependencies:**
